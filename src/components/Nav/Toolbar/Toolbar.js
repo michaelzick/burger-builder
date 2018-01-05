@@ -5,9 +5,13 @@ import NavItems from '../NavItems/NavItems';
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
-        <div>MENU</div>
+        <div className={classes.DesktopOnly}>
+            MENU
+        </div>
 
-        <div className={classes.Logo}>
+        <div
+            onClick={props.openSideDrawer}
+            className={classes.Logo}>
             <Logo />
         </div>
 
