@@ -16,8 +16,11 @@ class Layout extends Component {
     }
 
     sideDrawerOpenedHander = () => {
+        var show = window.visualViewport.width > 499
+                    ? false : true;
+
         this.setState({
-            showSideDrawer: true
+            showSideDrawer: show
         });
     }
 
