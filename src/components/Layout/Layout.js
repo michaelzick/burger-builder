@@ -15,19 +15,18 @@ class Layout extends Component {
         });
     }
 
-    sideDrawerOpenedHander = () => {
-        var show = window.visualViewport.width > 499
-                    ? false : true;
-
-        this.setState({
-            showSideDrawer: show
+    sideDrawerToggle = () => {
+        this.setState((prevState) => {
+            return {
+                showSideDrawer: !prevState.showSideDrawer
+            };
         });
     }
 
     render () {
         return (
             <Aux>
-                <Toolbar openSideDrawer={this.sideDrawerOpenedHander} />
+                <Toolbar toggleSideDrawer={this.sideDrawerToggle} />
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     close={this.sideDrawerClosedHander} />
