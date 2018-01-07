@@ -36,8 +36,6 @@ class BurgerBuilder extends Component {
 
         updatedIngredients[type] = newIngredientCount;
 
-        console.log(newTotalPrice)
-
         this.setState({
             totalPrice: newTotalPrice,
             ingredients: updatedIngredients
@@ -96,7 +94,7 @@ class BurgerBuilder extends Component {
     purchaseContinueHandler = () => {
         const order = {
             ingredients: this.state.ingredients,
-            price: parseFloat(this.state.totalPrice),
+            price: parseFloat(this.state.totalPrice.toFixed(2), 10),
             customer: {
                 name: 'Michael',
                 address: {
@@ -106,7 +104,7 @@ class BurgerBuilder extends Component {
                 },
                 email: 'asdf@asdfasdf.com'
             },
-            deliverMethos: 'fastest'
+            deliveryMethod: 'fastest'
         };
 
         axios.post('/order.json', order)
