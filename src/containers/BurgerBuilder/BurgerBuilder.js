@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from '../../AxiosOrders';
 import Aux from '../../hoc/Aux/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -34,6 +35,8 @@ class BurgerBuilder extends Component {
         const newTotalPrice = this.state.totalPrice + priceAddition;
 
         updatedIngredients[type] = newIngredientCount;
+
+        console.log(newTotalPrice)
 
         this.setState({
             totalPrice: newTotalPrice,
@@ -91,7 +94,24 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        alert('You continue');
+        const order = {
+            ingredients: this.state.ingredients,
+            price: parseFloat(this.state.totalPrice),
+            customer: {
+                name: 'Michael',
+                address: {
+                    street: '123 Test St',
+                    zip: 99999,
+                    state: 'CA'
+                },
+                email: 'asdf@asdfasdf.com'
+            },
+            deliverMethos: 'fastest'
+        };
+
+        axios.post('/order.json', order)
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err));
     }
 
     render () {
