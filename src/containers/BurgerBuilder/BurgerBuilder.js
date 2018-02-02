@@ -26,7 +26,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-        console.log(this.props);
+        console.log('BurgerBuilder: ', this.props);
 
         axios.get('/ingredients.json')
             .then(resp => {

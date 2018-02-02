@@ -12,7 +12,7 @@ class Checkout extends Component {
     };
 
     componentDidMount () {
-        console.log(this.props);
+        console.log('Checkout: ', this.props);
     }
 
     render () {
