@@ -11,10 +11,14 @@ class Checkout extends Component {
         }
     };
 
+    componentDidMount () {
+        console.log(this.props);
+    }
+
     render () {
         return (
             <div>
-                <CheckoutSummary ingredients={this.state.ingredients}/>
+                <CheckoutSummary ingredients={this.state.ingredients} />
             </div>
         );
     }
