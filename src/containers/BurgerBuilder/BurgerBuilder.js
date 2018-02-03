@@ -6,7 +6,7 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+// import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -26,7 +26,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-        console.log('BurgerBuilder: ', this.props);
+        console.log(this.props);
 
         axios.get('/ingredients.json')
             .then(resp => {
@@ -194,4 +194,5 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+// export default withErrorHandler(BurgerBuilder, axios);
+export default BurgerBuilder;
