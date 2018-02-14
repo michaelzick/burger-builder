@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { BurgerIngredient } from './BurgerIngredient';
 import classes from './BurgerIngredient.css';
 
-configure ({adapter: new Adapter()});
+configure({adapter: new Adapter()});
 
 describe ('<BurgerIngredient />', () => {
     it ('should return ingredient', () => {
