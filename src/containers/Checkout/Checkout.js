@@ -22,6 +22,8 @@ class Checkout extends Component {
             }
         }
 
+        console.log('ing', ingredients);
+
         this.setState({
             ingredients: ingredients,
             totalPrice: price
