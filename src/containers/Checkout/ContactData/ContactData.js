@@ -102,7 +102,8 @@ class ContactData extends Component {
                         }
                     ]
                 },
-                value: '',
+                value: 'fastest',
+                validation: {},
                 valid: true
             }
         },
@@ -159,8 +160,6 @@ class ContactData extends Component {
             formIsValid = updatedOrderForm[input].valid && formIsValid;
         }
 
-        console.log(formIsValid);
-
         this.setState({
             orderForm: updatedOrderForm,
             formIsValid: formIsValid
@@ -169,10 +168,6 @@ class ContactData extends Component {
 
     checkValidity = (value, rules) => {
         let isValid = true;
-
-        if (!rules) {
-            return;
-        }
 
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
