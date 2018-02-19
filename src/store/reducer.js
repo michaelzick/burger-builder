@@ -7,15 +7,11 @@ const initialState = {
         cheese: 0,
         salad: 0
     },
-    totalPrice: 4,
-    purchasable: false,
-    purchasing: false,
-    loading: false,
-    error: false
+    totalPrice: 4
 };
 
 const reducer = (state=initialState, action) => {
-    switch (action) {
+    switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
             return {
                 ...state,
