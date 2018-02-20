@@ -19,7 +19,6 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
     state = {
-        ingredients: null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
@@ -143,8 +142,8 @@ class BurgerBuilder extends Component {
                     <Burger ingredients={this.props.ingr}/>
 
                     <BuildControls
-                        ingredientAdded={this.props.addIngredientHandler}
-                        ingredientRemoved={this.props.removeIngredientHandler}
+                        ingredientAdded={this.props.onIngredientAdded}
+                        ingredientRemoved={this.props.onIngredientRemoved}
                         price={this.state.totalPrice}
                         disabled={disabledInfo}
                         ordering={this.purchaseHandler}
@@ -187,11 +186,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onIngrAdded: (ingredientName) =>
-            dispatch({typs: actionTypes.ADD_INGREDIENT}, ingredientName),
-        onIngrRemoved: (ingredientName) =>
-            dispatch({typs: actionTypes.REMOVE_INGREDIENT}, ingredientName),
-    }
-}
+        onIngredientAdded: (ingrName) =>
+            dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: ingrName}),
+        onIngredientRemoved: (ingrName) =>
+            dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingrName})
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
