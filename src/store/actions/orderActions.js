@@ -1,0 +1,29 @@
+import * as actionTypes from './actionTypes';
+import axios from '../../axiosOrders.js';
+
+export const purchaseBurderSuccess = (id, orderData) => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_SUCCESS,
+        orderId: id,
+        orderData: orderData
+    };
+};
+
+export const purchaseBurderFailed = (err) => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_FAILED,
+        error: err
+    };
+};
+
+export const purchaseBurgerStart = (orderData) => {
+    return (dispatch) => {
+        axios.post('/orders.json', orderData)
+            .then(resp => {
+                dispatch(purchaseBurderSuccess(resp.data, orderData));
+            })
+            .catch(err => {
+                purchaseBurderFailed(err);
+            });
+    };
+};
