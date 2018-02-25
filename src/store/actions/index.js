@@ -5,5 +5,6 @@ export {
 } from './burgerBuilderActions';
 
 export {
-    purchaseBurger
+    purchaseBurger,
+    purchaseInit
 } from './orderActions';
