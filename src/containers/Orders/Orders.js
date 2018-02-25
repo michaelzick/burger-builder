@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from '../../axiosOrders';
 import Order from '../../components/Order/Order';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+import classes from './Orders.css';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 class Orders extends Component {
     state = {
@@ -34,15 +35,18 @@ class Orders extends Component {
     }
 
     render () {
-        return (
-            <div>
-                {this.state.orders.map(order => (
+        let orders = this.state.orders.length ?
+            this.state.orders.map((order) => (
                     <Order
                         ingredients={order.ingredients}
                         price={+order.price}
                         key={order.id}
                     />
-                ))};
+            )) : <h1 className={classes.NoOrders}>You don't have any orders yet</h1>;
+
+        return (
+            <div>
+                {orders}
             </div>
         );
     }
