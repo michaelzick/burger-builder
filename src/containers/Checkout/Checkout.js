@@ -23,6 +23,10 @@ class Checkout extends Component {
                         checkoutCancelled={this.checkoutCancelHandler}
                         checkoutContinued={this.checkoutContinuedHandler}
                         ingredients={this.props.ingr} />;
+
+                    <Route
+                        path={this.props.match.path + '/contact-data'}
+                        component={ContactData} />
                 </div>
             );
         }

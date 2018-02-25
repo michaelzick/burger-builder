@@ -6,15 +6,15 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import burgerBuilder from './store/reducers/burgerBuilderReducer';
 import thunk from 'redux-thunk';
-import order from './store/reducers/orderReducer';
+import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
+import orderReducer from './store/reducers/orderReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    burgerBuilder: burgerBuilder,
-    order: order
+    burgerBuilder: burgerBuilderReducer,
+    order: orderReducer
 });
 
 const store = createStore(
