@@ -33,6 +33,7 @@ const reducer = (state=initialState, action) => {
             };
 
             return updateObject(state, updatedState);
+
         case actionTypes.REMOVE_INGREDIENT:
             const updatedIngredient2 = {
                 [action.ingredientName]:
@@ -50,16 +51,19 @@ const reducer = (state=initialState, action) => {
             };
 
             return updateObject(state, updatedState2);
+
         case actionTypes.SET_INGREDIENTS:
             return updateObject(state, {
                 ingredients: action.ingredients,
                 error: false,
                 totalPrice: 4
             });
+
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             return updateObject(state, {
                 error: true
             });
+
         default:
             return state;
     }
