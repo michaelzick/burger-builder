@@ -36,6 +36,25 @@ const modIngredient = (state, action, isAdd) => {
     return updateObject(state, updatedState);
 };
 
+const setIngredients = (state, action) => {
+    return updateObject(state, {
+        ingredients: {
+            salad: action.ingredients.salad,
+            bacon: action.ingredients.bacon,
+            cheese: action.ingredients.cheese,
+            meat: action.ingredients.meat
+        },
+        error: false,
+        totalPrice: 4
+    });
+};
+
+const fetchIngrFailed = (state) => {
+    return updateObject(state, {
+        error: true
+    });
+};
+
 const reducer = (state=initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
@@ -45,16 +64,10 @@ const reducer = (state=initialState, action) => {
             return modIngredient(state, action, false);
 
         case actionTypes.SET_INGREDIENTS:
-            return updateObject(state, {
-                ingredients: action.ingredients,
-                error: false,
-                totalPrice: 4
-            });
+            return setIngredients(state, action);
 
         case actionTypes.FETCH_INGREDIENTS_FAILED:
-            return updateObject(state, {
-                error: true
-            });
+            return fetchIngrFailed(state);
 
         default:
             return state;

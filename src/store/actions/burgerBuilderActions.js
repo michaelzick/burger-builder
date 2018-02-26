@@ -22,12 +22,7 @@ export const fetchIngrFailed = () => {
 export const setIngredients = (ingr) => {
     return {
         type: actionTypes.SET_INGREDIENTS,
-        ingredients: {
-            salad: ingr.salad,
-            bacon: ingr.bacon,
-            cheese: ingr.cheese,
-            meat: ingr.meat
-        }
+        ingredients: ingr
     };
 };
 
