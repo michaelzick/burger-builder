@@ -14,43 +14,35 @@ const INGREDIENT_PRICES = {
     meat: 1.3
 };
 
+const modIngredient = (state, action, isAdd) => {
+    const updatedIngredient = {
+        [action.ingredientName]:
+                isAdd ? state.ingredients[action.ingredientName] + 1 :
+                    state.ingredients[action.ingredientName] - 1
+    };
+
+    const updatedIngredients = updateObject (
+        state.ingredients, updatedIngredient
+    );
+
+    const updatedState = {
+        ingredients: updatedIngredients,
+        totalPrice: isAdd ? state.totalPrice +
+                        INGREDIENT_PRICES[action.ingredientName] :
+                            state.totalPrice -
+                                INGREDIENT_PRICES[action.ingredientName]
+    };
+
+    return updateObject(state, updatedState);
+};
+
 const reducer = (state=initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
-            const updatedIngredient = {
-                [action.ingredientName]:
-                        state.ingredients[action.ingredientName] + 1
-            };
-
-            const updatedIngredients = updateObject (
-                state.ingredients, updatedIngredient
-            );
-
-            const updatedState = {
-                ingredients: updatedIngredients,
-                totalPrice: state.totalPrice +
-                    INGREDIENT_PRICES[action.ingredientName]
-            };
-
-            return updateObject(state, updatedState);
+            return modIngredient(state, action, true);
 
         case actionTypes.REMOVE_INGREDIENT:
-            const updatedIngredient2 = {
-                [action.ingredientName]:
-                        state.ingredients[action.ingredientName] + 1
-            };
-
-            const updatedIngredients2 = updateObject (
-                state.ingredients, updatedIngredient2
-            );
-
-            const updatedState2 = {
-                ingredients: updatedIngredients2,
-                totalPrice: state.totalPrice +
-                    INGREDIENT_PRICES[action.ingredientName]
-            };
-
-            return updateObject(state, updatedState2);
+            return modIngredient(state, action, false);
 
         case actionTypes.SET_INGREDIENTS:
             return updateObject(state, {
