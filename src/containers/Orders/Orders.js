@@ -3,46 +3,30 @@ import axios from '../../axiosOrders';
 import Order from '../../components/Order/Order';
 import classes from './Orders.css';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Orders extends Component {
-    state = {
-        orders: [],
-        loading: true
-    }
-
     componentDidMount () {
-        axios.get('/orders.json')
-            .then(resp => {
-                const fetchedOrders = [];
-
-                for (let key in resp.data) {
-                    fetchedOrders.push({
-                        ...resp.data[key],
-                        id: key
-                    });
-                }
-
-                this.setState({
-                    loading: false,
-                    orders: fetchedOrders
-                });
-            })
-            .catch(err => {
-                this.setState({
-                    loading: false
-                });
-            });
+        this.props.onFetchOrders();
     }
 
     render () {
-        let orders = this.state.orders.length ?
-            this.state.orders.map((order) => (
-                    <Order
-                        ingredients={order.ingredients}
-                        price={+order.price}
-                        key={order.id}
-                    />
-            )) : <h1 className={classes.NoOrders}>You don't have any orders yet</h1>;
+        let orders = <Spinner />;
+
+        if (!this.props.loading) {
+            orders = this.props.orders.length ?
+                this.props.orders.map((order) => (
+                        <Order
+                            ingredients={order.ingredients}
+                            price={+order.price}
+                            key={order.id}
+                        />
+                )) : <h1 className={classes.NoOrders}>
+                        You don't have any orders yet
+                     </h1>;
+        }
 
         return (
             <div>
@@ -52,4 +36,17 @@ class Orders extends Component {
     }
 }
 
-export default withErrorHandler(Orders, axios);
+const mapStateToProps = (state) => {
+    return {
+        orders: state.order.orders,
+        loading: state.order.loading
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onFetchOrders: () => dispatch(actions.fetchOrders())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));
