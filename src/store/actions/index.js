@@ -12,4 +12,4 @@ export {
 
 export {
     auth
-} from './auth';
+} from './authActions';
