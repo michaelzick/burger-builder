@@ -124,7 +124,6 @@ class Auth extends Component {
                     {form}
                     <Button btnType='Success'>SUBMIT</Button>
                 </form>
-
             </div>
         );
     }
