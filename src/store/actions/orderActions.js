@@ -22,11 +22,11 @@ export const purchaseBurgerStart = () => {
     };
 };
 
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (token, orderData) => {
     return (dispatch) => {
         dispatch(purchaseBurgerStart());
 
-        axios.post('/orders.json', orderData)
+        axios.post('/orders.json?auth=' + token, orderData)
             .then(resp => {
                 dispatch(purchaseBurgerSuccess(resp.data.name, orderData));
             })
